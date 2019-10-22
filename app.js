@@ -4,8 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require('fs');
-
-
 const graphqlExpress = require('express-graphql');
 const schema = require('./graphql/schema/schema');
 

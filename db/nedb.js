@@ -1,18 +1,24 @@
-
 const Datastore = require('nedb');
 const db = {}
+db.owners = new Datastore({filename: __dirname+'/data/owners.db', autoload: true});
+db.pets = new Datastore({filename:__dirname+'/data/pets.db', autoload: true});
 
-db.owners = new Datastore(__dirname+'/data/owners.db');
-db.pets = new Datastore(__dirname+'/data/pets.db');
-
-db.owners.loadDatabase();
-db.pets.loadDatabase();
 
 /**
  * converting nedb callback methods to promises and exporting only few methods.
  */
 let exportDBMethods = {};
 
+//wrapper on load method
+exportDBMethods.load = function(collection){
+  return new Promise(function(resolve, reject){
+    db[collection].loadDatabase(function(){
+      return  resolve({})
+    });
+  });
+  
+
+}
 //wrapper on insert method
 exportDBMethods.insertDocument = function (collection, doc){
   return new Promise(function (resolve, reject){

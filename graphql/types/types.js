@@ -17,6 +17,7 @@ type Query {
   owners: [Owners!]
   pets: [Pets!]
   owner(name: String!): Owners
+  updateLevel(level: String!): String
   
 }
 type Mutation {

@@ -45,7 +45,7 @@ describe('Testing Pets', () => {
         .expect(200)
         .end((err,res) => {
             if (err) return done(err);
-            //console.log(JSON.stringify(res.body))
+          //  console.log(JSON.stringify(res.body))
             let pet = res.body.data.editPet;
             
             expect(pet.name).not.to.be.undefined;
