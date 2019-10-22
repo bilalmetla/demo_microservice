@@ -1,9 +1,9 @@
 
 
-var winston = require('winston');
+const winston = require('winston');
 require('winston-daily-rotate-file');
 let tracing = {
-    "level": "debug", // you can set one of them as log level = "error", "warn", "info", "verbose", "debug", "silly"
+    "level": "info", // you can set one of them as log level = "error", "warn", "info", "verbose", "debug", "silly"
     "consoleModeEnable": false,
     "fileModeEnable": true,
     zippedArchive: true,

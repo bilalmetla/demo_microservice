@@ -6,7 +6,7 @@ const resolveFunctions = {
   Query: {
     updateLevel: (_, args)=>{
       logger.updateLogLevel(args.level);
-      return 'Updated log level to '+args.levle;
+      return 'Updated log level to '+args.level;
     },
    //return all owners list.
     owners : async(root, args, context, info)=> {
@@ -19,7 +19,9 @@ const resolveFunctions = {
        let owner = await db.findOneDocument('owners', {name: args.name});
        logger.debug('owner')
        logger.debug(JSON.stringify(owner))
-       
+       if(!owner){
+         return owner
+       }
        let pets = await db.findDocument('pets', {_id: {$in: owner.pets} });
        logger.debug('owner - pets')
        logger.debug(JSON.stringify(pets))
@@ -75,7 +77,7 @@ const resolveFunctions = {
             logger.debug(pushedRows)
             
             if(pushedRows == 0){
-                return {};
+                return ;
             }
 
             return newPet;
@@ -97,14 +99,11 @@ const resolveFunctions = {
             logger.debug('args.id :'+args.id)
             logger.debug(JSON.stringify(pet))
             
-            let updatedRows = await db.updateDocument('pets', {_id: args.id }, {$set : pet}  , { multi: false });
+            let updatedRows = await db.updateDocument('pets', {_id: args.id }, {$set : pet}  , { multi: false })
             logger.debug('editPet - updatedRows')
             logger.debug(updatedRows)
 
-            if(updatedRows == 0){
-              return {}
-            }
-            return pet;            
+            return updatedRows;           
 
         }catch(e){logger.error(e); throw e}
       }

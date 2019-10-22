@@ -27,9 +27,6 @@ describe('Testing Owners', function() {
           });
      });
 
-    
-
-
     it('returns owners List', (done) => {
         request.post('/graphql')
         .send({ query :'{owners{ name email phone address pets {name colour age breed } } }' })
@@ -57,5 +54,21 @@ describe('Testing Owners', function() {
           });
      });
 
-    
+    // some negative test cases
+
+    it('returns no owner from list', (done) => {
+      request.post('/graphql')
+      .send({ query :'{owner (name: "HELLO"){ name email phone address pets{name age colour breed} } }' })
+      .expect(200)
+      .end((err,res) => {
+          if (err) return done(err);
+         // console.log(JSON.stringify(res.body))
+          let owner = res.body.data.owner;
+          expect(owner).to.be.null;
+          
+          done();
+        });
+   });
+
+
 });

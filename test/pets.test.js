@@ -41,18 +41,18 @@ describe('Testing Pets', () => {
 
      it('edit pet', (done) => {
         request.post('/graphql')
-        .send({ query :`mutation {editPet(id: "${pet._id}" name: "cat6" colour: "red" age: 2 breed: "sahiwal" owner: "${owner._id}" ) { name } }` })
+        .send({ query :`mutation {editPet(id: "${pet._id}" name: "cat6" colour: "red" age: 2 breed: "sahiwal" owner: "${owner._id}" )  }` })
         .expect(200)
         .end((err,res) => {
             if (err) return done(err);
-          //  console.log(JSON.stringify(res.body))
+            //console.log(JSON.stringify(res.body))
             let pet = res.body.data.editPet;
-            
-            expect(pet.name).not.to.be.undefined;
-            expect(pet.name).to.be.equal("cat6");
+            expect(pet).not.to.be.undefined;
+            expect(pet).to.be.equal(1);
             done();
           });
      });
 
+     
 
 });

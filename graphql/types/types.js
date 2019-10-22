@@ -23,7 +23,7 @@ type Query {
 type Mutation {
   addOwner(name: String!, email: String!, address: String!, phone: Float!): Owners!
   addPet(name: String!, colour: String!, age: Float!, breed: String!, owner: String!): Pets!
-  editPet(id: String!, name: String!, colour: String!, age: Float!, breed: String!, owner: String!): Pets!
+  editPet(id: String!, name: String!, colour: String!, age: Float!, breed: String!, owner: String!): Float
 }
 `;
 

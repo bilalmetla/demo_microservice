@@ -2,7 +2,6 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
 const fs = require('fs');
 const graphqlExpress = require('express-graphql');
 const schema = require('./graphql/schema/schema');
@@ -10,20 +9,10 @@ const schema = require('./graphql/schema/schema');
 
 const app = express();
 
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
-
-// create a write stream (in append mode)
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-
-// setup the logger
-app.use(logger('combined', { stream: accessLogStream }))
-//app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 //graphqlExpress 
 app.use('/graphql', graphqlExpress({
