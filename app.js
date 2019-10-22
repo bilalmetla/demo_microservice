@@ -1,26 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var path = require('path');
-var fs = require('fs');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const fs = require('fs');
 
 
-//var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
 const graphqlExpress = require('express-graphql');
 const schema = require('./graphql/schema/schema');
 
 
-var app = express();
+const app = express();
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'jade');
 
 // create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 // setup the logger
 app.use(logger('combined', { stream: accessLogStream }))
